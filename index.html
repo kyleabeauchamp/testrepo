@@ -159,6 +159,21 @@ Church, 2011.
 <slide  >
   
     <hgroup>
+      <h2>Molecular dynamics is (finally) fast</h2>
+      <h3>A \$999 GPU buys 128 ns / day on solvated proteins</h3>
+    </hgroup>
+    <article ><p><center>
+<img height=420 src=figures/TitanNew.jpg />
+</center></p>
+<footer class="source"> 
+GTX Titan, DHFR, OpenMM 6.2 (openmm.org) See also: Gromacs, AMBER, Charmm, NAMD, DESMOND, ACEMD
+</footer></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
       <h2>OpenMM</h2>
       <h3>GPU accelerated molecular dynamics</h3>
     </hgroup>
@@ -247,7 +262,6 @@ http://rmcgibbo.org/posts/whats-new-in-msmbuilder3/
       <h3></h3>
     </hgroup>
     <article ><pre class="prettyprint" data-lang="python">
-# To install, `conda install -c https://conda.binstar.org/omnia msmbuilder`
 from msmbuilder import example_datasets, cluster, markovstatemodel
 from sklearn.pipeline import make_pipeline
 
@@ -276,7 +290,7 @@ Also has command line interface.
       <h3>Read, write, and analyze trajectories with only a few lines of Python.</h3>
     </hgroup>
     <article ><ul>
-<li>Used by MSMBuilder for trajectory-specific functionality</li>
+<li>Used by MSMBuilder for trajectory featurization</li>
 <li>Multitude of formats (PDB, DCD, XTC, HDF, CDF, mol2)</li>
 <li>Geometric trajectory analysis (distances, angles, RMSD)</li>
 <li>Numpy / SSE kernels enable Folding@Home scale analysis</li>
@@ -298,7 +312,6 @@ McGibbon et al, 2014
       <h3>Lightweight Pythonic API</h3>
     </hgroup>
     <article ><pre class="prettyprint" data-lang="python">
-# To install, `conda install -c https://conda.binstar.org/omnia mdtraj`
 import mdtraj as md
 
 trajectory = md.load("./trajectory.h5")
@@ -331,23 +344,6 @@ McGibbon et al, 2014
  
 </slide>
 
-<slide  >
-  
-    <hgroup>
-      <h2>Models are made to be broken</h2>
-      <h3>How can we falsify and refine computer based models?</h3>
-    </hgroup>
-    <article ><ul>
-<li>Chemistry and biophysics are labor-intensive</li>
-<li>Thousands of parameters = thousands of measurements</li>
-<li>Reproducibilty, scalability, archival</li>
-</ul>
-<p><center>
-<img height=250 src=figures/robot_image.jpg />
-</center></p></article>
- 
-</slide>
-
 <slide class="segue dark nobackground" >
   
     <!-- <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside> -->
@@ -377,7 +373,7 @@ User: I tried easy_install and other things and that didn't work for me.</font>
   
     <hgroup>
       <h2>Building scientific software is hard!</h2>
-      <h3>2008: I was compiling BLAS / Numpy / Scipy by hand...</h3>
+      <h3>Dependency graph for biophysical modeling.</h3>
     </hgroup>
     <article ><p><center>
 <img height=520 src=figures/dependencies0.png />
@@ -391,37 +387,7 @@ Red means hard to install.
 <slide  >
   
     <hgroup>
-      <h2>Building scientific software is hard!</h2>
-      <h3>2010: Switched to Enthought python</h3>
-    </hgroup>
-    <article ><p><center>
-<img height=520 src=figures/dependencies1.png />
-</center></p>
-<footer class="source"> 
-Red means hard to install.
-</footer></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Building scientific software is hard!</h2>
-      <h3>Present: Conda</h3>
-    </hgroup>
-    <article ><p><center>
-<img height=520 src=figures/dependencies2.png />
-</center></p>
-<footer class="source"> 
-Red means hard to install.
-</footer></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Facile package sharing</h2>
+      <h2>Facile package sharing with conda</h2>
       <h3></h3>
     </hgroup>
     <article ><pre>
@@ -445,7 +411,8 @@ Me: `conda install -c https://conda.binstar.org/omnia mdtraj`</font>
       <h3>Simulation, Munging, Analysis, Visualization</h3>
     </hgroup>
     <article ><pre class="prettyprint" data-lang="bash">
-conda install -c https://conda.binstar.org/omnia omnia
+conda config --add channels http://conda.binstar.org/omnia/
+conda install omnia
 </pre>
 
 <ul>
@@ -462,6 +429,268 @@ conda install -c https://conda.binstar.org/omnia omnia
  
 </slide>
 
+<slide class="segue dark nobackground" >
+  
+    <!-- <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside> -->
+    <hgroup class="auto-fadein">
+      <h2>Benchmarking Small Molecule Forcefields at the Scale of NIST</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Models are made to be broken</h2>
+      <h3>How can we falsify and refine computer based models?</h3>
+    </hgroup>
+    <article ><ul>
+<li>Chemistry and biophysics are labor-intensive</li>
+<li>Thousands of parameters = thousands of measurements</li>
+<li>Reproducibilty, scalability, archival</li>
+</ul>
+<p><center>
+<img height=250 src=figures/robot_image.jpg />
+</center></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Small molecule forcefields need work</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=500 src=figures/mobley_dielectric.png />
+</center></p>
+<footer class="source"> 
+Fennell, Mobley.  J. Phys. Chem. B. 2014
+</footer></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Data access is killing forcefields</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>Forcefields should be consistent with all available data</li>
+<li>Most datasets are heterogeneous, offline, and static</li>
+</ul>
+<p><center>
+<img height=325 src=figures/qc_supply_grinder_510482.jpg />
+<img height=300 src=figures/stack-of-old-books.jpg />
+</center></p>
+<footer class="source"> 
+See also work by Wang, Pande, Swope, Case, MacKerell, Ponder, Best, Hummer, Bruschweiler.
+</footer></article>
+ 
+</slide>
+
+<slide class="segue dark nobackground" >
+  
+    <!-- <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside> -->
+    <hgroup class="auto-fadein">
+      <h2>WANTED: Reliable, machine-readable, open archive of physicochemical measurements!</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>NIST Thermodynamics Research Center</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=500 src=figures/boulder3.jpg />
+</center></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Data Capture at NIST/TRC: ThermoML</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=540 src="figures/pipeline.png"/>
+</center></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>ThermoML is rapidly growing</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=475 src=figures/thermoml_by_time_new.png />
+</center></p>
+<footer class="source"> 
+Figure from Chiraco, J. Chem. Eng. Dat., 2013.
+</footer></article>
+ 
+</slide>
+
+<slide class="segue dark nobackground" >
+  
+    <!-- <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside> -->
+    <hgroup class="auto-fadein">
+      <h2>Can we leverage ThermoML for forcefield validation?</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Density and dielectric constants as forcefield tests</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>Sensitive to nonbonded parameters</li>
+<li>Simple ensemble average geometric interpretation</li>
+</ul>
+<p><mathjax>$$\rho = \langle \frac{M}{V} \rangle$$</mathjax></p>
+<p><mathjax>$$\epsilon = 1 + \frac{4\pi}{3} \frac{\langle \mu \cdot \mu \rangle - \langle \mu \rangle \cdot \langle \mu \rangle}{V k_B T}$$</mathjax></p>
+<footer class="source"> 
+See also van der Spoel, JCTC, 2011 and Fennell, 2012.
+</footer></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>How many measurements are there?</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=450 src=figures/funnel.png />
+</center></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Benchmarking neat liquid densities and dielectric constants</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>OpenMM 6.2</li>
+<li>GAFF + AM1-BCC (Antechamber + OpenEye)</li>
+<li>Converge each density to 0.0002 g / mL (<mathjax>$\approx$</mathjax> expt. error)</li>
+</ul>
+<p><center>
+<img height=200 src=figures/openmm.png />
+</center></p>
+<footer class="source"> 
+PME + Langevin 1 fs + Monte Carlo Barostat + Fixed HBond Constraints + 1000 molecules per box
+</footer></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Densities are in the ballpark</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=500 src=figures/densities_thermoml.png />
+</center></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Inverse dielectric constant is proportional to interaction strength</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><mathjax>$$U(r) = \frac{1}{4 \pi \epsilon} \frac{q_1 q_2}{r} \propto \frac{1}{\epsilon}$$</mathjax></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Static dielectric constants are consistently underestimated</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=450 src=figures/dielectrics_thermoml_nocorr.png />
+</center></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Fixed charges fail to capture polarizability</h2>
+      <h3>Observed: $\epsilon \approx 2.0$, Predicted: $\epsilon \approx 1.0$</h3>
+    </hgroup>
+    <article ><p><center>
+<img height=400 src=figures/nonpolar_molecules.png />
+</center></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Atom counting predicts molecular polarizability to within 2%</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=100 src=figures/sales_title.png />
+</center></p>
+<p><mathjax>$$\alpha = 1.53 n_C + 0.17 n_H + 0.57 n_O + 1.05 n_N + 2.99 n_S + \\ 2.48 n_P + 0.22 n_F + 2.16 n_{Cl} + 0.32 $$</mathjax></p>
+<p><mathjax>$$\epsilon_{corrected} = \epsilon_{MD} + 4 \pi N  \frac{\alpha}{\langle V \rangle}$$</mathjax></p>
+<footer class="source"> 
+Sales, 2002
+</footer></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Empirical atomic polarizability corrections reduce bias</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=450 src=figures/dielectrics_thermoml.png />
+</center></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Where do we go from here?</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>Small molecule forcefields need help</li>
+<li>ThermoML is a NIST-supported, machine-readable, and growing set of physicochemical data</li>
+<li>We built a semi-automated benchmark of densities and dielectric constants in ThermoML</li>
+<li>Empirical polarizability model improves comparisons to measured dielectric constants</li>
+<li>Scale up, real-time simulation, web frontend, more experiments</li>
+</ul></article>
+ 
+</slide>
+
 <slide  >
   
     <hgroup>
@@ -472,7 +701,7 @@ conda install -c https://conda.binstar.org/omnia omnia
 <li>Reproducible</li>
 <li>Automated</li>
 <li>Accessible</li>
-<li>Tested</li>
+<li>Falsifiable</li>
 <li>Useful</li>
 </ul></article>
  
@@ -486,17 +715,17 @@ conda install -c https://conda.binstar.org/omnia omnia
     </hgroup>
     <article ><ul>
 <li>John Chodera + ChoderaLab (MSKCC)</li>
+<li>Julie Behr (MSKCC)</li>
+<li>Kenneth Kroenlein (NIST)</li>
 <li>Robert McGibbon (Stanford)</li>
 <li>Peter Eastman (Stanford)</li>
 <li>Vijay Pande + PandeLab (Stanford)</li>
-<li>Daniel Parton (MSKCC)</li>
-<li>Yutong Zhao (Stanford, Folding@Home)</li>
 <li>Joy Ku (Stanford)</li>
 <li>Jason Swails (Rutgers)</li>
 <li>Justin MacCallum (U. Calgary)</li>
 </ul>
 <footer class="source"> 
-Jan-Hendrik Prinz, Bas Rustenburg, Sonya Hanson
+Jan-Hendrik Prinz, Danny Parton, Bas Rustenburg, Sonya Hanson
 Greg Bowman, Christian Schwantes, TJ Lane, Vince Voelz, Imran Haque, Matthew Harrigan, Carlos Hernandez, Bharath Ramsundar, Lee-Ping Wang
 Frank Noe, Martin Scherer, Xuhui Huang, Sergio Bacallado, Mark Friedrichs
 </footer></article>
@@ -511,7 +740,7 @@ Frank Noe, Martin Scherer, Xuhui Huang, Sergio Bacallado, Mark Friedrichs
     </hgroup>
     <article ><pre class="prettyprint" data-lang="bash">
 conda config --add channels http://conda.binstar.org/omnia/
-conda install -c https://conda.binstar.org/omnia omnia
+conda install omnia
 </pre>
 
 <p>omnia.md</p>
