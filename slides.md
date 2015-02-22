@@ -3,18 +3,6 @@
 % favicon: figures/membrane.png
 
 ---
-title: Moore's Law
-
-
-<center>
-<img height=550 src=figures/moore_law.png />
-</center>
-
-<footer class="source"> 
-http://en.wikipedia.org/wiki/Moore%27s_law
-</footer>
-
----
 title: erooM's Law for R&D Efficiency
 subtitle: Producing a drug costs $2B and 15 years, with 95% fail rate
 
@@ -51,12 +39,12 @@ subtitle: Designing the binding, specificity, and signaling of chemotherapeutics
 
 
 <footer class="source"> 
-Movie Credit: Shan et al: J. Am. Chem. Soc. (2011).  <br>
+Movie Credit: Shan et al: J. Am. Chem. Soc. (2011).  Dasatinib / src
 </footer>
 
 
 ---
-title: Biophysical modeling at scale: performance, reproducibility, and accuracy
+title: Biophysical modeling at scale: theory and software
 class: segue dark nobackground
 
 ---
@@ -90,7 +78,6 @@ subtitle: GPU accelerated molecular dynamics
 
 - Extensible C++ library with Python wrappers
 - Hardware backends for CUDA, OpenCL, CPU
-- $>100$ nanoseconds ($10^{-7}$ s) per day on a GTX Titan
 
 <center>
 <img height=300 src=figures/openmm.png />
@@ -117,21 +104,102 @@ http://folding.stanford.edu/
 </footer>
 
 ---
-title: How to use massively parallel simulation?
+title: Traditional Simulation Analysis
 
+<center>
+<img height=400 src=figures/NewPaths1.png />
+</center>
+---
+title: Massively parallel simulation?
+
+<center>
+<img height=400 src=figures/NewPaths2.png />
+</center>
 
 
 ---
-title: Massively Parallel Conformational Dynamics with Markov State Models
+title: Introduction to Markov State Models
+
+<center>
+<img height=400 src=figures/NewPaths3.png />
+</center>
+
+
+---
+title: Counting Transitions
+
+<center>
+
+<img height=300 src=figures/NewPaths-2State.png />
+
+$\downarrow$
+
+$A = (111222222)$
+
+---
+title: Counting Transitions
+
+<center>
+
+$A = (111222222)$
+
+$\downarrow$
+
+$C = \begin{pmatrix} C_{1\rightarrow 1} & C_{1\rightarrow 2} \\\ C_{2 \rightarrow 1} & C_{2 \rightarrow 2} \end{pmatrix} =  \begin{pmatrix}2 & 1 \\\ 0 & 5\end{pmatrix}$
+
+</center>
+
+---
+title: Estimating Rates
+
+<center>
+$C = \begin{pmatrix} C_{1\rightarrow 1} & C_{1\rightarrow 2} \\\ C_{2 \rightarrow 1} & C_{2 \rightarrow 2} \end{pmatrix} = \begin{pmatrix}2 & 1 \\\ 0 & 5\end{pmatrix}$
+
+$\downarrow$
+
+$T = \begin{pmatrix} T_{1\rightarrow 1} & T_{1\rightarrow 2} \\\ T_{2 \rightarrow 1} & T_{2 \rightarrow 2} \end{pmatrix} = \begin{pmatrix}\frac{2}{3} & \frac{1}{3} \\\ 0 & 1\end{pmatrix}$
+
+</center>
+
+
+---
+title: Application: Millisecond Protein Folding
 
 
 <center>
-<img height=400 src=figures/NTL9_network.jpg />
+<img height=450 src=figures/NTL9_network.jpg />
 </center>
 
 <footer class="source"> 
-msmbuilder.org <br>
 Voelz, Bowman, Beauchamp, Pande. J. Am. Chem. Soc., 2010
+</footer>
+
+
+---
+title: (Future) Application: Ligand Binding
+
+<center>
+<img height=450 src=figures/gprc_ligands.jpg />
+</center>
+
+<footer class="source"> 
+Kobilka, 2012.  See also Shukla, 2013.
+</footer>
+
+---
+title: MSMBuilder
+subtitle: Finding meaning in massive simulation datasets
+
+
+
+<center>
+<img height=300 src=figures/msmbuilder.png />
+</center>
+
+
+<footer class="source"> 
+msmbuilder.org <br>
+https://github.com/msmbuilder/msmbuilder
 </footer>
 
 
@@ -156,6 +224,29 @@ http://rmcgibbo.org/posts/whats-new-in-msmbuilder3/
 </footer>
 
 ---
+title: Re-engineering sklearn for timeseries
+subtitle: fit() acts on lists of arrays, rather than $n_{samples} \times n_{features}$ arrays
+
+
+<pre class="prettyprint" data-lang="python">
+
+from msmbuilder import markovstatemodel
+
+trajectories = [np.array([0, 0, 0, 1, 1, 1, 0, 0])]
+
+msm = markovstatemodel.MarkovStateModel()
+msm.fit(trajectories)
+
+msm.transmat_
+
+array([[ 0.75      ,  0.25      ],
+       [ 0.33333333,  0.66666667]])
+
+</pre>
+
+This is different from sklearn, which uses 2D arrays!!!
+
+---
 title: MSMBuilder3: Demo
 
 <pre class="prettyprint" data-lang="python">
@@ -178,23 +269,34 @@ msmbuilder.org <br>
 Also has command line interface.
 </footer>
 
+---
+title: MDTraj
+
+<center>
+<img height=250 src=figures/mdtraj_logo-small.png />
+</center>
+
+
+<footer class="source"> 
+mdtraj.org <br>
+McGibbon et al, 2014
+</footer>
+
 
 ---
 title: MDTraj
-subtitle: Read, write, and analyze trajectories with only a few lines of Python.
+subtitle: Read, write, and analyze single trajectories with only a few lines of Python.
 
 - Used by MSMBuilder for trajectory featurization
 - Multitude of formats (PDB, DCD, XTC, HDF, CDF, mol2)
 - Geometric trajectory analysis (distances, angles, RMSD)
 - Numpy / SSE kernels enable Folding@Home scale analysis
 
-<center>
-<img height=200 src=figures/mdtraj_logo-small.png />
-</center>
 
 <footer class="source"> 
-mdtraj.org <br>
-McGibbon et al, 2014
+mdtraj.org <t>
+McGibbon et al, 2014 <t>
+Haque, 2014
 </footer>
 
 ---
@@ -214,32 +316,13 @@ indices, phi = md.compute_phi(trajectory)
 </center>
 
 <footer class="source"> 
-mdtraj.org <br>
-McGibbon et al, 2014
-</footer>
-
-
-
----
-title: MDTraj IPython Notebook
-
-<center>
-<img height=525 src=figures/mdtraj_notebook.png />
-</center>
-
-
-<footer class="source"> 
-mdtraj.org <br>
-McGibbon et al, 2014
+mdtraj.org <t>
+McGibbon et al, 2014 <t>
 </footer>
 
 
 ---
-title: Python Packaging Blues
-class: segue dark nobackground
-
----
-title: Building scientific software is hard!
+title: Python packaging blues
 
 <pre>
 
@@ -248,18 +331,11 @@ User: I tried easy_install and other things and that didn't work for me.</font>
 
 </pre>
 
----
-title: Building scientific software is hard!
-subtitle: Dependency graph for biophysical modeling.
-
-
 <center>
-<img height=520 src=figures/dependencies0.png />
+<img height=370 src=figures/dependencies0.png />
 </center>
 
-<footer class="source"> 
-Red means hard to install.
-</footer>
+
 
 ---
 title: Facile package sharing with conda
@@ -276,9 +352,10 @@ Me: `conda install -c https://conda.binstar.org/omnia mdtraj`</font>
 
 </pre>
 
+
 ---
 title: A full stack for biophysical computation
-subtitle: Simulation, Munging, Analysis, Visualization
+subtitle: omnia.md
 
 <pre class="prettyprint" data-lang="bash">
 conda config --add channels http://conda.binstar.org/omnia/
@@ -290,10 +367,10 @@ conda install omnia
 - MSMBuilder 3.0
 - Yank 1.0 (beta)
 - pymbar 2.1
-- EMMA$^1$
+- EMMA
 
 <footer class="source"> 
-1: Senne, Noe.  J. Chem. Theor. Comp. 2012
+omnia.md
 </footer>
 
 
@@ -439,7 +516,7 @@ title:  Static dielectric constants are consistently underestimated
 
 ---
 title: Fixed charges fail to capture polarizability
-subtitle: Observed: $\epsilon \approx 2.0$, Predicted: $\epsilon \approx 1.0$
+subtitle: Observed: $\epsilon \approx 2.0$, Predicted: $\epsilon \approx 1.0$, $\Delta \Delta G \approx$ 2 kcal / mol
 
 <center>
 <img height=400 src=figures/nonpolar_molecules.png />
@@ -470,20 +547,18 @@ title: Empirical atomic polarizability corrections reduce bias
 ---
 title: Where do we go from here?
 
-- Small molecule forcefields need help
-- ThermoML is a NIST-supported, machine-readable, and growing set of physicochemical data
-- We built a semi-automated benchmark of densities and dielectric constants in ThermoML
-- Empirical polarizability model improves comparisons to measured dielectric constants
-- Scale up, real-time simulation, web frontend, more experiments
+- Scale up, real-time simulation, web frontend
+- Perform new experiments in automated wetlab
+- Bayesian (MCMC) forcefield / experimental design
+- Polarizable forcefields
 
 ---
-title: Biophysical modeling should be:
+title: Conclusions
 
-- Reproducible
-- Automated
-- Accessible
-- Falsifiable
-- Useful
+- Distributed GPU computing enables millisecond simulation
+- MSMBuilder / MDTraj builds machine learning models of conformational dynamics
+- omnia.md: Conda packaging of OpenMM, MSMBuilder, MDTraj, and more
+- ThermoML: towards automated benchmarking of atomistic models
 
 ---
 title: People
@@ -503,24 +578,3 @@ Jan-Hendrik Prinz, Danny Parton, Bas Rustenburg, Sonya Hanson
 Greg Bowman, Christian Schwantes, TJ Lane, Vince Voelz, Imran Haque, Matthew Harrigan, Carlos Hernandez, Bharath Ramsundar, Lee-Ping Wang
 Frank Noe, Martin Scherer, Xuhui Huang, Sergio Bacallado, Mark Friedrichs
 </footer>
-
-
----
-title: Questions?
-
-<pre class="prettyprint" data-lang="bash">
-conda config --add channels http://conda.binstar.org/omnia/
-conda install omnia
-</pre>
-
-omnia.md
-
-openmm.org
-
-mdtraj.org
-
-github.com/msmbuilder/msmbuilder
-
-github.com/choderalab/yank/
-
-

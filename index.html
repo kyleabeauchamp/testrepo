@@ -73,21 +73,6 @@ URL: https://code.google.com/p/io-2012-slides
 <slide  >
   
     <hgroup>
-      <h2>Moore's Law</h2>
-      <h3></h3>
-    </hgroup>
-    <article ><p><center>
-<img height=550 src=figures/moore_law.png />
-</center></p>
-<footer class="source"> 
-http://en.wikipedia.org/wiki/Moore%27s_law
-</footer></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
       <h2>erooM's Law for R&D Efficiency</h2>
       <h3>Producing a drug costs $2B and 15 years, with 95% fail rate</h3>
     </hgroup>
@@ -126,7 +111,7 @@ Figure credit: @jchodera, Tom Cruise
 <video id="sampleMovie" src="movies/shaw-dasatanib-2.mov" loop=\"true\ autoPlay=\"true\  width="512" height="384"></video>
 </center></p>
 <footer class="source"> 
-Movie Credit: Shan et al: J. Am. Chem. Soc. (2011).  <br>
+Movie Credit: Shan et al: J. Am. Chem. Soc. (2011).  Dasatinib / src
 </footer></article>
  
 </slide>
@@ -135,7 +120,7 @@ Movie Credit: Shan et al: J. Am. Chem. Soc. (2011).  <br>
   
     <!-- <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside> -->
     <hgroup class="auto-fadein">
-      <h2>Biophysical modeling at scale: performance, reproducibility, and accuracy</h2>
+      <h2>Biophysical modeling at scale: theory and software</h2>
       <h3></h3>
     </hgroup>
   
@@ -180,7 +165,6 @@ GTX Titan, DHFR, OpenMM 6.2 (openmm.org) See also: Gromacs, AMBER, Charmm, NAMD,
     <article ><ul>
 <li>Extensible C++ library with Python wrappers</li>
 <li>Hardware backends for CUDA, OpenCL, CPU</li>
-<li><mathjax>$&gt;100$</mathjax> nanoseconds (<mathjax>$10^{-7}$</mathjax> s) per day on a GTX Titan</li>
 </ul>
 <p><center>
 <img height=300 src=figures/openmm.png />
@@ -214,25 +198,122 @@ http://folding.stanford.edu/
 <slide  >
   
     <hgroup>
-      <h2>How to use massively parallel simulation?</h2>
+      <h2>Traditional Simulation Analysis</h2>
       <h3></h3>
     </hgroup>
-    <article ></article>
+    <article ><p><center>
+<img height=400 src=figures/NewPaths1.png />
+</center></p></article>
  
 </slide>
 
 <slide  >
   
     <hgroup>
-      <h2>Massively Parallel Conformational Dynamics with Markov State Models</h2>
+      <h2>Massively parallel simulation?</h2>
       <h3></h3>
     </hgroup>
     <article ><p><center>
-<img height=400 src=figures/NTL9_network.jpg />
+<img height=400 src=figures/NewPaths2.png />
+</center></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Introduction to Markov State Models</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=400 src=figures/NewPaths3.png />
+</center></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Counting Transitions</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center></p>
+<p><img height=300 src=figures/NewPaths-2State.png /></p>
+<p><mathjax>$\downarrow$</mathjax></p>
+<p><mathjax>$A = (111222222)$</mathjax></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Counting Transitions</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center></p>
+<p><mathjax>$A = (111222222)$</mathjax></p>
+<p><mathjax>$\downarrow$</mathjax></p>
+<p><mathjax>$C = \begin{pmatrix} C_{1\rightarrow 1} &amp; C_{1\rightarrow 2} \\\ C_{2 \rightarrow 1} &amp; C_{2 \rightarrow 2} \end{pmatrix} =  \begin{pmatrix}2 &amp; 1 \\\ 0 &amp; 5\end{pmatrix}$</mathjax></p>
+<p></center></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Estimating Rates</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<mathjax>$C = \begin{pmatrix} C_{1\rightarrow 1} &amp; C_{1\rightarrow 2} \\\ C_{2 \rightarrow 1} &amp; C_{2 \rightarrow 2} \end{pmatrix} = \begin{pmatrix}2 &amp; 1 \\\ 0 &amp; 5\end{pmatrix}$</mathjax></p>
+<p><mathjax>$\downarrow$</mathjax></p>
+<p><mathjax>$T = \begin{pmatrix} T_{1\rightarrow 1} &amp; T_{1\rightarrow 2} \\\ T_{2 \rightarrow 1} &amp; T_{2 \rightarrow 2} \end{pmatrix} = \begin{pmatrix}\frac{2}{3} &amp; \frac{1}{3} \\\ 0 &amp; 1\end{pmatrix}$</mathjax></p>
+<p></center></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Application: Millisecond Protein Folding</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=450 src=figures/NTL9_network.jpg />
+</center></p>
+<footer class="source"> 
+Voelz, Bowman, Beauchamp, Pande. J. Am. Chem. Soc., 2010
+</footer></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>(Future) Application: Ligand Binding</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=450 src=figures/gprc_ligands.jpg />
+</center></p>
+<footer class="source"> 
+Kobilka, 2012.  See also Shukla, 2013.
+</footer></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>MSMBuilder</h2>
+      <h3>Finding meaning in massive simulation datasets</h3>
+    </hgroup>
+    <article ><p><center>
+<img height=300 src=figures/msmbuilder.png />
 </center></p>
 <footer class="source"> 
 msmbuilder.org <br>
-Voelz, Bowman, Beauchamp, Pande. J. Am. Chem. Soc., 2010
+https://github.com/msmbuilder/msmbuilder
 </footer></article>
  
 </slide>
@@ -259,6 +340,32 @@ Voelz, Bowman, Beauchamp, Pande. J. Am. Chem. Soc., 2010
 <footer class="source"> 
 http://rmcgibbo.org/posts/whats-new-in-msmbuilder3/
 </footer></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Re-engineering sklearn for timeseries</h2>
+      <h3>fit() acts on lists of arrays, rather than $n_{samples} \times n_{features}$ arrays</h3>
+    </hgroup>
+    <article ><pre class="prettyprint" data-lang="python">
+
+from msmbuilder import markovstatemodel
+
+trajectories = [np.array([0, 0, 0, 1, 1, 1, 0, 0])]
+
+msm = markovstatemodel.MarkovStateModel()
+msm.fit(trajectories)
+
+msm.transmat_
+
+array([[ 0.75      ,  0.25      ],
+       [ 0.33333333,  0.66666667]])
+
+</pre>
+
+<p>This is different from sklearn, which uses 2D arrays!!!</p></article>
  
 </slide>
 
@@ -294,7 +401,23 @@ Also has command line interface.
   
     <hgroup>
       <h2>MDTraj</h2>
-      <h3>Read, write, and analyze trajectories with only a few lines of Python.</h3>
+      <h3></h3>
+    </hgroup>
+    <article ><p><center>
+<img height=250 src=figures/mdtraj_logo-small.png />
+</center></p>
+<footer class="source"> 
+mdtraj.org <br>
+McGibbon et al, 2014
+</footer></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>MDTraj</h2>
+      <h3>Read, write, and analyze single trajectories with only a few lines of Python.</h3>
     </hgroup>
     <article ><ul>
 <li>Used by MSMBuilder for trajectory featurization</li>
@@ -302,12 +425,10 @@ Also has command line interface.
 <li>Geometric trajectory analysis (distances, angles, RMSD)</li>
 <li>Numpy / SSE kernels enable Folding@Home scale analysis</li>
 </ul>
-<p><center>
-<img height=200 src=figures/mdtraj_logo-small.png />
-</center></p>
 <footer class="source"> 
-mdtraj.org <br>
-McGibbon et al, 2014
+mdtraj.org <t>
+McGibbon et al, 2014 <t>
+Haque, 2014
 </footer></article>
  
 </slide>
@@ -329,8 +450,8 @@ indices, phi = md.compute_phi(trajectory)
 <img height=300 src=figures/phi.png />
 </center></p>
 <footer class="source"> 
-mdtraj.org <br>
-McGibbon et al, 2014
+mdtraj.org <t>
+McGibbon et al, 2014 <t>
 </footer></article>
  
 </slide>
@@ -338,33 +459,7 @@ McGibbon et al, 2014
 <slide  >
   
     <hgroup>
-      <h2>MDTraj IPython Notebook</h2>
-      <h3></h3>
-    </hgroup>
-    <article ><p><center>
-<img height=525 src=figures/mdtraj_notebook.png />
-</center></p>
-<footer class="source"> 
-mdtraj.org <br>
-McGibbon et al, 2014
-</footer></article>
- 
-</slide>
-
-<slide class="segue dark nobackground" >
-  
-    <!-- <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside> -->
-    <hgroup class="auto-fadein">
-      <h2>Python Packaging Blues</h2>
-      <h3></h3>
-    </hgroup>
-  
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Building scientific software is hard!</h2>
+      <h2>Python packaging blues</h2>
       <h3></h3>
     </hgroup>
     <article ><pre>
@@ -372,22 +467,11 @@ McGibbon et al, 2014
 <font color="red">User: I couldn't really install the mdtraj module on my computer [...]
 User: I tried easy_install and other things and that didn't work for me.</font>
 
-</pre></article>
- 
-</slide>
+</pre>
 
-<slide  >
-  
-    <hgroup>
-      <h2>Building scientific software is hard!</h2>
-      <h3>Dependency graph for biophysical modeling.</h3>
-    </hgroup>
-    <article ><p><center>
-<img height=520 src=figures/dependencies0.png />
-</center></p>
-<footer class="source"> 
-Red means hard to install.
-</footer></article>
+<p><center>
+<img height=370 src=figures/dependencies0.png />
+</center></p></article>
  
 </slide>
 
@@ -415,7 +499,7 @@ Me: `conda install -c https://conda.binstar.org/omnia mdtraj`</font>
   
     <hgroup>
       <h2>A full stack for biophysical computation</h2>
-      <h3>Simulation, Munging, Analysis, Visualization</h3>
+      <h3>omnia.md</h3>
     </hgroup>
     <article ><pre class="prettyprint" data-lang="bash">
 conda config --add channels http://conda.binstar.org/omnia/
@@ -428,10 +512,10 @@ conda install omnia
 <li>MSMBuilder 3.0</li>
 <li>Yank 1.0 (beta)</li>
 <li>pymbar 2.1</li>
-<li>EMMA<mathjax>$^1$</mathjax></li>
+<li>EMMA</li>
 </ul>
 <footer class="source"> 
-1: Senne, Noe.  J. Chem. Theor. Comp. 2012
+omnia.md
 </footer></article>
  
 </slide>
@@ -645,7 +729,7 @@ PME + Langevin 1 fs + Monte Carlo Barostat + Fixed HBond Constraints + 1000 mole
   
     <hgroup>
       <h2>Fixed charges fail to capture polarizability</h2>
-      <h3>Observed: $\epsilon \approx 2.0$, Predicted: $\epsilon \approx 1.0$</h3>
+      <h3>Observed: $\epsilon \approx 2.0$, Predicted: $\epsilon \approx 1.0$, $\Delta \Delta G \approx$ 2 kcal / mol</h3>
     </hgroup>
     <article ><p><center>
 <img height=400 src=figures/nonpolar_molecules.png />
@@ -689,11 +773,10 @@ Sales, 2002
       <h3></h3>
     </hgroup>
     <article ><ul>
-<li>Small molecule forcefields need help</li>
-<li>ThermoML is a NIST-supported, machine-readable, and growing set of physicochemical data</li>
-<li>We built a semi-automated benchmark of densities and dielectric constants in ThermoML</li>
-<li>Empirical polarizability model improves comparisons to measured dielectric constants</li>
-<li>Scale up, real-time simulation, web frontend, more experiments</li>
+<li>Scale up, real-time simulation, web frontend</li>
+<li>Perform new experiments in automated wetlab</li>
+<li>Bayesian (MCMC) forcefield / experimental design</li>
+<li>Polarizable forcefields</li>
 </ul></article>
  
 </slide>
@@ -701,15 +784,14 @@ Sales, 2002
 <slide  >
   
     <hgroup>
-      <h2>Biophysical modeling should be:</h2>
+      <h2>Conclusions</h2>
       <h3></h3>
     </hgroup>
     <article ><ul>
-<li>Reproducible</li>
-<li>Automated</li>
-<li>Accessible</li>
-<li>Falsifiable</li>
-<li>Useful</li>
+<li>Distributed GPU computing enables millisecond simulation</li>
+<li>MSMBuilder / MDTraj builds machine learning models of conformational dynamics</li>
+<li>omnia.md: Conda packaging of OpenMM, MSMBuilder, MDTraj, and more</li>
+<li>ThermoML: towards automated benchmarking of atomistic models</li>
 </ul></article>
  
 </slide>
@@ -736,25 +818,6 @@ Jan-Hendrik Prinz, Danny Parton, Bas Rustenburg, Sonya Hanson
 Greg Bowman, Christian Schwantes, TJ Lane, Vince Voelz, Imran Haque, Matthew Harrigan, Carlos Hernandez, Bharath Ramsundar, Lee-Ping Wang
 Frank Noe, Martin Scherer, Xuhui Huang, Sergio Bacallado, Mark Friedrichs
 </footer></article>
- 
-</slide>
-
-<slide  >
-  
-    <hgroup>
-      <h2>Questions?</h2>
-      <h3></h3>
-    </hgroup>
-    <article ><pre class="prettyprint" data-lang="bash">
-conda config --add channels http://conda.binstar.org/omnia/
-conda install omnia
-</pre>
-
-<p>omnia.md</p>
-<p>openmm.org</p>
-<p>mdtraj.org</p>
-<p>github.com/msmbuilder/msmbuilder</p>
-<p>github.com/choderalab/yank/</p></article>
  
 </slide>
 
