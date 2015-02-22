@@ -106,8 +106,6 @@ title: OpenMM Powers Folding@Home
 
 - Largest distributed computing project
 - 100,000 CPUs, 10,000 GPUs, 40 petaflops!
-- Hundreds of microseconds per day aggregate simulation
-- ~100 research papers on folding, misfolding, signalling
 
 <center>
 <img height=300 src=figures/folding-icon.png />
@@ -115,13 +113,15 @@ title: OpenMM Powers Folding@Home
 
 
 <footer class="source"> 
-http://folding.stanford.edu/ <br>
-Gromacs also powers Folding@Home: http://gromacs.org/
+http://folding.stanford.edu/
 </footer>
+
+---
+title: How to use massively parallel simulation?
+
 
 
 ---
-
 title: Massively Parallel Conformational Dynamics with Markov State Models
 
 
